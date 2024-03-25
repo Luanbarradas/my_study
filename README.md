@@ -2,7 +2,10 @@
 
 ## Documentação da Trajetória de Estudo com JavaScript e Node.js
 
-Este repositório contém a documentação da minha jornada de estudo com JavaScript e Node.js, onde registro as tecnologias aprendidas e conceitos fundamentais para o desenvolvimento backend. ^Recaptulação de estudo para documentação (24/03/2024)^
+Este repositório contém a documentação da minha jornada de estudo com JavaScript e Node.js, onde registro as tecnologias aprendidas e conceitos fundamentais para o desenvolvimento backend. 
+* Esta é uma recaptulação e documentação de um estudo feito entre julho/2023 e março/2024 para melhor fixação do assunto.
+
+<hr>
 
 ### Tecnologias Aprendidas
 
