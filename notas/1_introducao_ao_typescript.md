@@ -8,14 +8,13 @@ O typescript deve ser usado para evitar erros de mudanças de tipos em variávei
 
 _Ex de erros de tipagem dinâmica:_
 
-```
+```ts
 function sum(a, b) {
-    return a + b;
+  return a + b;
 }
 
 sum(10, 10); // 20
-sum('2', '2'); // 22 👈 está retornando a concatenação de uma string!
-
+sum("2", "2"); // 22 👈 está retornando a concatenação de uma string!
 ```
 
 #### O que é o PropType e por que não usá-lo ao invés do Typescript?
@@ -71,7 +70,7 @@ Quando inicializado cria-se uma pasta chamada `tsconfig.json` (parece com a pack
 **Para transpilar o código** deve ser usar "npx ts 'nomdeDoArquivo.ts'"
 ex: `npx ts index.ts`
 
-**Para rodar um código TS sem transpilar**: `npm install -D ts-node`
+**Para rodar um código TS sem transpilar**: `npm install -D ts-node` `npx ts-node index.ts`
 
 #### Ordem de instalação e configuração do projeto com Typescript:
 
@@ -79,3 +78,5 @@ ex: `npx ts index.ts`
 2. `npm install -D typescript`
 3. `npm install -D ts-node`
 4. `npx tsc --init`
+
+5. npx ts-node "nomeDoArquivo" (roda o código sem transpilar. Obs. é necessário passar o caminho inteiro do arquivo).
