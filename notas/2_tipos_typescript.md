@@ -83,3 +83,161 @@ const imprimirMaiorIdade = (idade: number): boolean => {
 
 imprimir([123, "abc"]); // 123 dará erro pois a função só recebe strings
 ```
+
+### Mais tipos
+
+#### Unknown
+
+É um tipo de dado bem restrito. Pode utilizá-lo quando não tiver certeza do tipo de dado que virá do front. Serve para permitir a utilização dos dados e deve, em seguida, ser convertido para o tipo que deve ser recebido na aplicação.
+
+```ts
+//função de exemplo para converter de JSON para array
+const json = JSON.stringify(["Guido", "Vidal", "Dani", "Ruli"]);
+
+function converterJSON(info: string): unknown {
+  return JSON.parse(info);
+}
+
+const jsonConvertido = converterJSON(json) as string[];
+// as string[] diz ao TS que o jsonConvertido deve ser um array
+
+console.log(jsonConvertido[1]);
+```
+
+#### União de tipos
+
+Usar dois tipos em uma variável.
+
+_ex simples_:
+
+```ts
+let algumaCoisa: number | boolean;
+algumaCoisa = true;
+```
+
+Bons motivos para usar isso:
+
+```ts
+const cadastroUsuarios = (usuarios: { nome: string } | { nome: string }[]) => {
+  return usuarios;
+};
+
+const usuario = {
+  nome: "João",
+};
+
+const usuarios = [
+  {
+    nome: "Maria",
+  },
+  {
+    nome: "José",
+  },
+];
+
+cadastroUsuarios(usuario); // será aceito tanto usuario quanto usuarios
+```
+
+_Obs. Não usar a torto e a direito se não no fim será um Any._
+
+#### Parâmetros Opcionais
+
+Para falar que um parâmetro é opcional deve-se colocar `?` na hora de informar o seu tipo.
+
+_Ex_:
+
+```ts
+// o parâmetro nome será OBRIGATÓRIO e o parâmetro valor será OPCIONAL
+const cadastro = (info: { nome: string; valor?: number }) => {
+  console.log(`Você cadastrou ${info.nome} de valor ${info.valor}`);
+};
+
+cadastro({
+  nome: "Gol",
+});
+
+// Você cadastrou Gol de valor undefined
+```
+
+_Obs. Ao informar um parâmetro opcional é dada a permissão ao TS de retornar um valor undefined_
+
+Quando o parâmetro for opcional e o TS não tiver certeza se será passado o objeto dentro dele, ocorrerá um erro:
+
+```ts
+// aqui info é opcional - não apresentará erro de imediato mas essa função não irá funcionar.
+const cadastro = (info?: { nome: string; valor?: number }) => {
+  console.log(`Você cadastrou ${info.nome}`);
+};
+
+cadastro({
+  nome: "Gol",
+});
+
+// erro: o objeto possivelmente é undefined
+```
+
+É possível certificar ao TS que será passado o Objeto do Parâmetro com `!`
+
+```ts
+const cadastro = (info?: { nome: string; valor?: number }) => {
+  console.log(`Você cadastrou ${info!.nome}`);
+};
+
+// se no fim das contas eu não passar esse objeto aqui em baixo vai dar erro de qualquer jeito.
+// não usar essa ! a toa.
+cadastro({
+  nome: "Gol",
+});
+
+// ! -> non null assertion
+```
+
+#### Tuplas
+
+Um array que pode ter mais de um tipo.
+
+```ts
+let informacoes: [string, number, boolean];
+
+informacoes = ["lohan", 57, false];
+// passar na mesma ordem da tupla se não vai dar erro por não serem o mesmo tipo.
+```
+
+_Obs. Cuidado com a quantidade de elementos diferentes dentro das tuplas para não virarem um Any._
+
+#### Type Narrowing
+
+O estreitamento.
+
+Os métodos devem ser globais em relação ao que foi passado.
+
+```ts
+const cadastro = (cpf: string | number) => {
+  cpf.toUpperCase(); // Não funciona por ser um método apenas de strings.
+
+  cpf.toFixed(); // Não funciona por ser um método apenas de numbers.
+};
+```
+
+Para conseguir usar um método especifico é bom fazer validações.
+
+```ts
+const cadastro = (cpf: string | number) => {
+  let resultado: string | number;
+  if (typeof cpf === "string") {
+    resultado = cpf.toUpperCase();
+  } else {
+    resultado = cpf.toFixed(2);
+  }
+
+  console.log(resultado);
+};
+
+cadastro("00012323111");
+```
+
+#### Void e Never
+
+#### Type
+
+#### Tipos Literais
