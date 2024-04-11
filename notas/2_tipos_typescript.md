@@ -238,6 +238,89 @@ cadastro("00012323111");
 
 #### Void e Never
 
+Uma função **Void** não retorna nenhum valor, sendo utilizada apenas para realizar ações ou operações sem a necessidade de retorno de um dado específico.
+
+_Ex:_
+
+```ts
+const teste = () => {
+  console.log("função sem retorno");
+  return;
+};
+```
+
+Uma função **Never** também não retorna valor, no entanto, ela lança uma exceção e interrompe a execução do programa de forma definitiva, indicando um ponto de falha que não pode ser tratado de maneira tradicional.
+
+```ts
+const validarErro = () => {
+  throw new Error("função never");
+};
+```
+
 #### Type
 
+Type é uma forma de criar tipos estruturados. (uma das funcionalidades mais importantes do TS)
+<br>
+O código feito até então tem dificil manutenção e legibilidade. Ex:
+
+```ts
+const cadastro = (info: {
+  nome: string;
+  idade: number;
+  email: string;
+  cpf: string;
+}) => {};
+```
+
+Por convenção um Type se escreve com a letra inicial maiúscula. Ex:
+
+```ts
+type Email = string;
+// ou
+type Usuario = { nome: string; idade: number; email: string; cpf: string };
+```
+
+Usando o Type o código de cadastro vai ficar:
+
+```ts
+const cadastro = (info: Usuario) => {};
+
+// trona-se possível utilizar em outras funções
+
+const cadastro2 = (info: Usuario) => {};
+```
+
+É possivel passar um tipo dentro de outro.
+
+```ts
+type Email = string;
+type Endereco = {
+  rua: string;
+  cep: string;
+};
+type Usuario = {
+  nome: string;
+  idade: number;
+  email: Email;
+  cpf: string;
+  endereco: Endereco;
+};
+
+const cadastro = (info: Usuario) => {
+  info.endereco.cep;
+};
+```
+
 #### Tipos Literais
+
+Quando se define uma string qualquer como um tipo de dado.
+
+```ts
+type Transacao = {
+  numero: number;
+  validade: string;
+  cvv: number;
+  nome: string;
+  tipo: "credito" | "debito"; // tipo só poderá ser um desses dois. Até se colocar "Credito" ou "Debito" vai dar errado.
+};
+```
