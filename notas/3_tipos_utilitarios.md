@@ -154,13 +154,41 @@ const luan: Pick<Usuario, Keys> = {
 
 ### Exclude
 
+Remove um tipo específico de uma lista de tipos. Por exemplo, se você tem uma lista de tipos como `A | B | C`, e você quer remover `A`, você pode usar `Exclude<A, A | B | C>` para obter apenas `B | C`.
+
 `Exclude<unionType, excludedMembers>`
+
+_ex_:
+
+```ts
+type ex1 = Exclude<"a" | "b" | "c", "a" | "b">; // no fim fica só o "c"
+
+type ex2 = Exclude<boolean | string | number, number>; // retirará o number.
+```
 
 ### Extract
 
+É o contrário de Exclude, o Extract seleciona um tipo específico de uma lista de tipos. Por exemplo, se você tem uma lista de tipos como `A | B | C`, e você quer apenas `A`, você pode usar Extract`<A, A | B | C>` para obter apenas A.
+
 `Extract<type, union>`
 
+_ex_:
+
+```ts
+type ex1 = Extract<"a" | "b" | "c", "a" | "b">; // vai ficar "a" e "b"
+
+type ex2 = Extract<number | number[] | boolean, number>; // ficará apenas o number
+```
+
 ### NonNullable
+
+NonNullable transforma um tipo que **pode ser** null ou undefined em um tipo que **não pode** ser null ou undefined. Por exemplo, se você tem um tipo `string | null | undefined`, aplicar NonNullable a ele resultará apenas em `string`.
+
+`NonNullable<type>`
+
+```ts
+type ex1 = NonNullable<number | string[] | null | undefined>; // vai retirar o null e o undefined
+```
 
 ### ReturnType
 
