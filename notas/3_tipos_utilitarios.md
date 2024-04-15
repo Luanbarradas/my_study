@@ -4,7 +4,7 @@ Bibliotecas prontas no TS que servem para manipular tipos e adcionar funcionalid
 
 ### Partial
 
-Aceita parte do tipo informado, faz com que não seja obrigátorio informar todas as propriedades dentro do tipo (Inlcusive é possivel passar um objeto vazio que irá contar como se tivesse passado parte do tipo).
+O `Partial` aceita parte do tipo informado, faz com que não seja obrigátorio informar todas as propriedades dentro do tipo (Inlcusive é possivel passar um objeto vazio que irá contar como se tivesse passado parte do tipo).
 
 _ex_:
 
@@ -29,7 +29,7 @@ cadastrarUsuario({
 
 ### Required
 
-Todas as propriedades do tipo informado são **obrigatórias**.
+Com `Required` todas as propriedades do tipo informado são **obrigatórias**.
 _ex_:
 
 ```ts
@@ -54,7 +54,7 @@ O uso de `Required` em uma função específica pode ser preferível quando nem 
 
 ### Readonly
 
-As propriedades do objeto são apenas para leitura.
+Com `Readonly` as propriedades do objeto são apenas para leitura.
 
 _ex_:
 
@@ -77,7 +77,7 @@ Uma boa situação para usar `Readonly` é quando temos alguma informação que 
 
 ### Record
 
-O **Record** é um tipo utilitário mais complexo que os anteriores, nele são passadas duas informações, as chaves e o tipo:
+O `Record` é um tipo utilitário mais complexo que os anteriores, nele são passadas duas informações, as chaves e o tipo:
 
 `Record<keys, type>`
 
@@ -110,7 +110,7 @@ const carros: Record<Marca, Carro> = {
 
 ### Pick
 
-Define as chaves que serão obrigatórias (útil quando você deseja criar um novo tipo com base em um tipo existente, mas precisa incluir apenas um subconjunto das propriedades originais).
+`Pick` define as chaves que serão obrigatórias (útil quando você deseja criar um novo tipo com base em um tipo existente, mas precisa incluir apenas um subconjunto das propriedades originais).
 
 `Pick<type, keys>`
 
@@ -132,7 +132,7 @@ const luan: Pick<Usuario, Keys> = {
 
 ### Omit
 
-Cria um novo tipo excluindo uma ou mais propriedades específicas de um tipo existente ( útil quando você deseja criar um novo tipo com base em um tipo existente, mas deseja remover algumas propriedades específicas desse novo tipo).
+O `Omit` cria um novo tipo excluindo uma ou mais propriedades específicas de um tipo existente ( útil quando você deseja criar um novo tipo com base em um tipo existente, mas deseja remover algumas propriedades específicas desse novo tipo).
 
 `Omit<type, keys>`
 
@@ -154,7 +154,7 @@ const luan: Pick<Usuario, Keys> = {
 
 ### Exclude
 
-Remove um tipo específico de uma lista de tipos. Por exemplo, se você tem uma lista de tipos como `A | B | C`, e você quer remover `A`, você pode usar `Exclude<A, A | B | C>` para obter apenas `B | C`.
+O `Exclude` remove um tipo específico de uma lista de tipos. Por exemplo, se você tem uma lista de tipos como `A | B | C`, e você quer remover `A`, você pode usar `Exclude<A, A | B | C>` para obter apenas `B | C`.
 
 `Exclude<unionType, excludedMembers>`
 
@@ -168,7 +168,7 @@ type ex2 = Exclude<boolean | string | number, number>; // retirará o number.
 
 ### Extract
 
-É o contrário de Exclude, o Extract seleciona um tipo específico de uma lista de tipos. Por exemplo, se você tem uma lista de tipos como `A | B | C`, e você quer apenas `A`, você pode usar Extract`<A, A | B | C>` para obter apenas A.
+É o contrário de Exclude, o `Extract` seleciona um tipo específico de uma lista de tipos. Por exemplo, se você tem uma lista de tipos como `A | B | C`, e você quer apenas `A`, você pode usar Extract`<A, A | B | C>` para obter apenas A.
 
 `Extract<type, union>`
 
@@ -182,7 +182,7 @@ type ex2 = Extract<number | number[] | boolean, number>; // ficará apenas o num
 
 ### NonNullable
 
-NonNullable transforma um tipo que **pode ser** null ou undefined em um tipo que **não pode** ser null ou undefined. Por exemplo, se você tem um tipo `string | null | undefined`, aplicar NonNullable a ele resultará apenas em `string`.
+`NonNullable` transforma um tipo que **pode ser** null ou undefined em um tipo que **não pode** ser null ou undefined. Por exemplo, se você tem um tipo `string | null | undefined`, aplicar NonNullable a ele resultará apenas em `string`.
 
 `NonNullable<type>`
 
@@ -192,4 +192,28 @@ type ex1 = NonNullable<number | string[] | null | undefined>; // vai retirar o n
 
 ### ReturnType
 
+`ReturnType` é uma ferramenta que ajuda a descobrir o tipo de dado que uma função retorna. Por exemplo, se você tem uma função que adiciona dois números e retorna o resultado, `ReturnType` diz que tipo de dado é esse resultado - por exemplo, `number`.
+
+```ts
+const soma = (a: number, b: number): number => {
+  return a + b;
+};
+
+type ResultadoType = ReturnType<typeof soma>;
+
+// ResultType será "number" porque é o tipo de retorno da função "soma"
+
+type ex1 = () => string;
+
+type ex2 = ReturnType<ex1>;
+```
+
 ### Tipos de manipulação de strings
+
+```ts
+type TipoTransacao = "credito" | "debito";
+
+type TipoTransacaoUpper = Uppercase<TipoTransacao>; // vai manipular as strings para ficar em maiusculo.
+
+// bom para quando quer mais garantia do que passar na string.
+```
