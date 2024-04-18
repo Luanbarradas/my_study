@@ -11,3 +11,5 @@
 ### Documentação.
 
 - https://www.typescriptlang.org/pt/docs/
+- https://www.typescriptlang.org/tsconfig
+- https://www.typescriptlang.org/docs/handbook/intro.html
