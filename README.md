@@ -37,7 +37,8 @@ Este repositório pode conter os seguintes tipos de recursos:
 
 O repositório está organizado para facilitar a navegação e o acompanhamento do progresso em cada área de estudo:
 
-minha_compilacao_estudos/
+```
+my_study/
 │
 ├── my_study_javascript/
 │   ├── projetos/
@@ -56,6 +57,7 @@ minha_compilacao_estudos/
     ├── exercicios/
     ├── notas/
     └── recursos/
+```
 
 ### Contribuições
 
