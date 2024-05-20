@@ -79,3 +79,55 @@ elemento.setAttribute("atributo", "novoValor");
 // Remover um atributo
 elemento.removeAttribute("atributo");
 ```
+
+## Selecionando Elementos
+
+1. `getElementById`
+
+   Procura o elemento pelo #id
+
+   - Ex:
+
+   ```javascript
+   document.getElementById("meu-id-elemento");
+   ```
+
+2. `getElementsByClassName`
+
+   Retorna um array de classes.
+
+   - Ex:
+
+   ```javascript
+   document.getElementsByClassName("meus-elementos");
+   ```
+
+3. `getElementsByTagName`
+
+   Acessar o elemento através de uma tag específica (tbm traz um array).
+
+   - Ex:
+
+   ```javascript
+   document.getElementsByTagName("div");
+   ```
+
+4. `querySelector`
+
+   Retorna um elemento com o seletor escolhido(id, class, tag...)
+
+   - Ex:
+
+   ```javascript
+   document.querySelector("elemento");
+   ```
+
+5. `querySelectorAll`
+
+   Retorna um array do seletor escolhido.
+
+   - Ex:
+
+   ```javascript
+   document.querySelectorAll("meus-elementos");
+   ```
