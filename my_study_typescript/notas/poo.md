@@ -258,3 +258,87 @@ export class Baleia extends Mamifero {
   }
 }
 ```
+
+## Polimorfismo:
+
+Polimorfismo é um conceito fundamental na programação orientada a objetos que permite que objetos de diferentes classes sejam tratados como objetos da mesma classe base. Isso é conseguido através da herança e da implementação de métodos comuns nas subclasses. Existem dois tipos principais de polimorfismo:
+
+1. **Polimorfismo em Tempo de Compilação (ou Sobrecarga de Métodos):** Permite que múltiplos métodos tenham o mesmo nome, mas com diferentes parâmetros. O compilador decide qual método chamar com base no número e tipo de argumentos fornecidos.
+
+2. **Polimorfismo em Tempo de Execução (ou Sobrescrita de Métodos):** Permite que uma subclasse forneça uma implementação específica de um método que já foi definido na sua superclasse. Isso é utilizado para permitir que uma classe derivada tenha um comportamento específico para métodos comuns.
+
+No contexto de polimorfismo em tempo de execução, os métodos que são sobrescritos nas subclasses são chamados através de uma referência da classe base, permitindo o comportamento específico da subclasse ser executado.
+
+**Exemplo de Polimorfismo em Tempo de Execução:**
+
+```ts
+// Definindo a classe base
+export type Animal = {
+  nome: string;
+  peso: number;
+};
+
+export class Mamifero {
+  public nome: string;
+  public peso: number;
+
+  constructor(animal: Animal) {
+    this.nome = animal.nome;
+    this.peso = animal.peso;
+  }
+
+  public emitirSom(): string {
+    return "Som de Mamífero";
+  }
+}
+```
+
+```ts
+// Definindo a subclasse Cachorro
+import { Mamifero, Animal } from "./Mamifero";
+
+export class Cachorro extends Mamifero {
+  constructor(animal: Animal) {
+    super(animal);
+  }
+
+  // Sobrescrevendo o método emitirSom da classe base
+  public emitirSom(): string {
+    return "Cachorro Latindo";
+  }
+}
+```
+
+```ts
+// Definindo a subclasse Baleia
+import { Mamifero, Animal } from "./Mamifero";
+
+export class Baleia extends Mamifero {
+  constructor(animal: Animal) {
+    super(animal);
+  }
+
+  // Sobrescrevendo o método emitirSom da classe base
+  public emitirSom(): string {
+    return "Baleia Emitindo Sons";
+  }
+}
+```
+
+```ts
+// Utilizando polimorfismo
+import { Mamifero } from "./Mamifero";
+import { Cachorro } from "./Cachorro";
+import { Baleia } from "./Baleia";
+
+const animais: Mamifero[] = [
+  new Cachorro({ nome: "Rex", peso: 20 }),
+  new Baleia({ nome: "Willy", peso: 30000 }),
+];
+
+animais.forEach((animal) => {
+  console.log(`${animal.nome}: ${animal.emitirSom()}`);
+});
+```
+
+Neste exemplo, a lista de `animais` contém objetos de diferentes classes (`Cachorro` e `Baleia`), mas todos são tratados como objetos da classe base `Mamifero`. Quando o método `emitirSom` é chamado, o comportamento específico da subclasse é executado devido à sobrescrita de métodos, demonstrando polimorfismo em tempo de execução.
