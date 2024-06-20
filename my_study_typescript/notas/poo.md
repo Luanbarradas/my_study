@@ -342,3 +342,93 @@ animais.forEach((animal) => {
 ```
 
 Neste exemplo, a lista de `animais` contém objetos de diferentes classes (`Cachorro` e `Baleia`), mas todos são tratados como objetos da classe base `Mamifero`. Quando o método `emitirSom` é chamado, o comportamento específico da subclasse é executado devido à sobrescrita de métodos, demonstrando polimorfismo em tempo de execução.
+
+## Interfaces:
+
+Interfaces são uma forma poderosa de definir contratos em TypeScript. Elas permitem que você defina a estrutura que um objeto deve seguir sem especificar a implementação. Isso promove a flexibilidade e a reusabilidade de código.
+
+Interfaces podem ser usadas para garantir que uma classe ou um objeto adere a uma determinada estrutura. Aqui estão alguns conceitos importantes relacionados a interfaces:
+
+1. **Definição de Interface:** Uma interface define um conjunto de propriedades e métodos que um objeto deve ter. Não inclui a implementação desses métodos.
+
+2. **Implementação de Interface:** Uma classe pode implementar uma ou mais interfaces, garantindo que ela fornece a implementação dos métodos e propriedades definidos nas interfaces.
+
+### Convenção de Nomes para Interfaces
+
+Por convenção, os nomes das interfaces geralmente começam com a letra "I" maiúscula. Isso ajuda a distinguir interfaces de outras entidades, como classes e tipos.
+
+**Exemplo de Uso de Interfaces:**
+
+```ts
+// Definindo a interface
+export interface IAnimal {
+  nome: string;
+  peso: number;
+
+  emitirSom(): string;
+}
+```
+
+```ts
+// Implementando a interface na classe Cachorro
+export class Cachorro implements IAnimal {
+  public nome: string;
+  public peso: number;
+
+  constructor(nome: string, peso: number) {
+    this.nome = nome;
+    this.peso = peso;
+  }
+
+  // Implementando o método da interface
+  public emitirSom(): string {
+    return "Cachorro Latindo";
+  }
+}
+```
+
+```ts
+// Implementando a interface na classe Baleia
+export class Baleia implements IAnimal {
+  public nome: string;
+  public peso: number;
+
+  constructor(nome: string, peso: number) {
+    this.nome = nome;
+    this.peso = peso;
+  }
+
+  // Implementando o método da interface
+  public emitirSom(): string {
+    return "Baleia Emitindo Sons";
+  }
+}
+```
+
+```ts
+// Utilizando as classes que implementam a interface
+import { IAnimal } from "./IAnimal";
+import { Cachorro } from "./Cachorro";
+import { Baleia } from "./Baleia";
+
+const animais: IAnimal[] = [
+  new Cachorro("Rex", 20),
+  new Baleia("Willy", 30000),
+];
+
+animais.forEach((animal) => {
+  console.log(`${animal.nome}: ${animal.emitirSom()}`);
+});
+```
+
+Neste exemplo, a interface `IAnimal` define que um objeto deve ter as propriedades `nome` e `peso`, e o método `emitirSom`. As classes `Cachorro` e `Baleia` implementam essa interface, garantindo que elas fornecem uma implementação para o método `emitirSom` e possuem as propriedades `nome` e `peso`.
+
+### Vantagens das Interfaces
+
+1. **Reusabilidade:** Interfaces permitem que diferentes classes implementem a mesma interface, promovendo a reusabilidade de código.
+
+2. **Flexibilidade:** Ao programar contra interfaces em vez de classes concretas, você pode facilmente alterar a implementação sem afetar o código que usa essas interfaces.
+
+3. **Documentação:** Interfaces servem como uma documentação clara do que uma classe deve fornecer, tornando o código mais legível e fácil de entender.
+
+4. **Type Safety:** Interfaces ajudam a garantir que um objeto ou classe adere a uma determinada estrutura, proporcionando segurança de tipos e reduzindo erros.
