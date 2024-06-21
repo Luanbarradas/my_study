@@ -432,3 +432,108 @@ Neste exemplo, a interface `IAnimal` define que um objeto deve ter as propriedad
 3. **Documentação:** Interfaces servem como uma documentação clara do que uma classe deve fornecer, tornando o código mais legível e fácil de entender.
 
 4. **Type Safety:** Interfaces ajudam a garantir que um objeto ou classe adere a uma determinada estrutura, proporcionando segurança de tipos e reduzindo erros.
+
+### Classes Abstratas
+
+**Usos:**
+
+1. **Herança:** Use classes abstratas quando há um relacionamento claro de herança entre as classes. Uma classe abstrata pode fornecer uma implementação parcial que outras classes podem herdar e completar.
+2. **Métodos Compartilhados:** Use classes abstratas para definir métodos e propriedades comuns que várias subclasses devem compartilhar. Uma classe abstrata pode ter tanto métodos implementados quanto não implementados (abstratos).
+3. **Forçar Implementação:** Se você quiser garantir que certas subclasses forneçam implementações específicas, use métodos abstratos na classe abstrata.
+
+**Exemplo:**
+
+```ts
+// Definindo uma classe abstrata
+export abstract class Mamifero {
+  public nome: string;
+  public peso: number;
+
+  constructor(nome: string, peso: number) {
+    this.nome = nome;
+    this.peso = peso;
+  }
+
+  // Método abstrato (sem implementação)
+  public abstract emitirSom(): string;
+
+  // Método não abstrato (com implementação)
+  public dormir(): string {
+    return `${this.nome} está dormindo`;
+  }
+}
+
+// Implementando a classe abstrata em uma subclasse
+export class Cachorro extends Mamifero {
+  constructor(nome: string, peso: number) {
+    super(nome, peso);
+  }
+
+  public emitirSom(): string {
+    return "Cachorro Latindo";
+  }
+}
+```
+
+### Quando Usar Interface vs. Classe Abstrata
+
+- **Interface:**
+
+  - Quando você precisa definir um contrato sem fornecer nenhuma implementação.
+  - Quando diferentes classes, que não têm um relacionamento de herança, devem seguir o mesmo conjunto de regras.
+  - Quando você precisa que uma classe implemente múltiplos contratos (interfaces).
+
+- **Classe Abstrata:**
+  - Quando você quer fornecer uma implementação parcial que outras classes devem herdar e completar.
+  - Quando existe um relacionamento claro de herança e compartilhamento de comportamento entre a classe base e suas subclasses.
+  - Quando você quer garantir que certas subclasses forneçam implementações específicas para métodos abstratos.
+
+### Exemplo Comparativo
+
+```ts
+// Usando Interface
+export interface IVoador {
+  voar(): void;
+}
+
+export class Passaro implements IVoador {
+  public voar(): void {
+    console.log("Pássaro voando");
+  }
+}
+
+export class Aviao implements IVoador {
+  public voar(): void {
+    console.log("Avião voando");
+  }
+}
+
+// Usando Classe Abstrata
+export abstract class Mamifero {
+  public nome: string;
+
+  constructor(nome: string) {
+    this.nome = nome;
+  }
+
+  public abstract emitirSom(): void;
+
+  public dormir(): void {
+    console.log(`${this.nome} está dormindo`);
+  }
+}
+
+export class Cachorro extends Mamifero {
+  public emitirSom(): void {
+    console.log("Cachorro Latindo");
+  }
+}
+
+export class Gato extends Mamifero {
+  public emitirSom(): void {
+    console.log("Gato Miando");
+  }
+}
+```
+
+Neste exemplo, a interface `IVoador` define um contrato para qualquer classe que deve implementar a funcionalidade de voar, enquanto a classe abstrata `Mamifero` fornece um comportamento comum para todos os mamíferos, além de exigir que subclasses implementem o método `emitirSom`.
