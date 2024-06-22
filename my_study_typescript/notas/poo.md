@@ -537,3 +537,56 @@ export class Gato extends Mamifero {
 ```
 
 Neste exemplo, a interface `IVoador` define um contrato para qualquer classe que deve implementar a funcionalidade de voar, enquanto a classe abstrata `Mamifero` fornece um comportamento comum para todos os mamíferos, além de exigir que subclasses implementem o método `emitirSom`.
+
+## Generics
+
+Generics em TypeScript permitem criar componentes que funcionam com diferentes tipos de dados, proporcionando flexibilidade e reutilização de código sem perder a segurança de tipos.
+
+### Vantagens dos Generics
+
+1. **Reutilização de Código:** Permitem criar componentes que funcionam com qualquer tipo de dado.
+2. **Segurança de Tipos:** Garantem que os tipos corretos sejam usados, prevenindo erros.
+3. **Flexibilidade:** Facilitam a criação de funções e classes que trabalham com diversos tipos.
+
+### Exemplos Simples
+
+#### Função Genérica
+
+```ts
+// Função genérica que retorna o valor passado
+function identidade<T>(valor: T): T {
+  return valor;
+}
+
+// Uso da função genérica
+let numero = identidade<number>(10); // número
+let texto = identidade<string>("Olá"); // string
+```
+
+#### Classe Genérica
+
+```ts
+// Classe genérica que armazena um valor
+class Caixa<T> {
+  private conteudo: T;
+
+  constructor(conteudo: T) {
+    this.conteudo = conteudo;
+  }
+
+  public obterConteudo(): T {
+    return this.conteudo;
+  }
+}
+
+// Uso da classe genérica
+let caixaDeNumero = new Caixa<number>(100);
+let caixaDeTexto = new Caixa<string>("Texto na caixa");
+```
+
+### Quando Usar Generics
+
+- **Funções e Métodos:** Para trabalhar com diferentes tipos de dados de forma segura.
+- **Classes e Interfaces:** Para criar estruturas que podem armazenar qualquer tipo de dado.
+
+Generics são fundamentais para escrever código TypeScript flexível e reutilizável.
